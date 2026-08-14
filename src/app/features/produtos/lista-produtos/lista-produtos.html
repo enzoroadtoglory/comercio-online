@@ -1,0 +1,69 @@
+<!--<h2>
+    Produto Selecionado:
+    @if(produtoSelecionado()){
+        <strong style="color: orange">{{produtoSelecionado() | uppercase }}</strong>
+    }@else{
+        <span style="color: red">Nenhum Produto Selecionado </span>
+    }
+</h2>
+@for(item of produtos(); track item){
+    <app-produto
+    [nome]="item.nome"
+    [preco]="item.preco"
+    (produtoSelecionado)="exibirProduto($event)"
+    ></app-produto>
+    <button (click)="adicionarAoCarrinho(item)">Adicionar ao carrinho</button>
+}
+<hr>
+<p><button (click)="adicionarProduto()">Adicionar Prodution</button></p>
+<p><button (click)="substituirProdutos()">Substituir Produtos</button></p>
+<hr>
+<h2>total de Produtos: {{totalProdutos()}}</h2>
+<h3>Valor Total: {{valorTotal() | precoFormatado}}</h3>
+
+<hr>
+<h2>carrinho</h2>
+@for(item of carrinho(); track $index){
+    <p>{{item.nome}} - {{item.preco |precoFormatado}}</p>
+}
+<p><strong>total no carrinho: </strong>{{quantidadeCarrinho()}}</p>
+<h3>Valor total: {{valorCarrinho() | precoFormatado}}</h3>
+<hr> -->
+
+<h2>Produtos</h2>
+<!-- Estado 1:carregamento -->
+ @if(carregando()){
+    <p><strong>Carregando produtos, aguarde...</strong></p>
+ }
+ <!-- Estado 2: erro -->
+    @if(erro()){
+        <p><strong style="color: red;">{{ erro() }}</strong></p>
+         <button (click)="carregarProdutos()"> Tente novamente</button>
+}
+  @if(!carregando() && !erro()){
+    <p><strong>Quantidade de produtos</strong>: {{totalProdutos()}}</p>
+  }
+    <section class="grid-produtos">
+    
+    @for(item of produtos(); track $index){
+        <app-produto
+        [nome]="item.nome"
+        [preco]="item.preco"
+        (produtoSelecionado)="exibirProduto($event)"
+        (produtoAdicionado)="adicionarAoCarrinho($event)"
+    >
+    </app-produto>
+  }
+  
+  </section>
+
+
+<!--carrinho-->
+<hr>
+<h2>Carrinho</h2>
+@for(item of carrinhoService.itens(); track $index){
+    <p>{{item.nome}} - {{item.preco | precoFormatado}}</p>
+}
+<hr>
+<p><strong>Quantidade no Carrinho: </strong>{{carrinhoService.quantidadeItens()}}</p>
+<p><strong>Valor Total: do carrinho </strong>{{carrinhoService.totalItens() | precoFormatado}}</p>
