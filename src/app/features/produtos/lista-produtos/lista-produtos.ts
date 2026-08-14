@@ -68,7 +68,7 @@ valorTotal = computed(() =>
     });
     effect(() => {
      if (typeof document !== 'undefined'){
-        document.title = `(${this.totalProdutos()}) -Loja do Gabs`;
+        document.title = `(${this.totalProdutos()}) -MAGALUCIA`;
       }
     });
   }

@@ -13,7 +13,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './header.css',
 })
 export class Header {
-  nomeLoja = 'Mercado do Hetero';
+  nomeLoja = 'Magalucia';
   private carrinhoService = inject(CarrinhoService);
   private authService = inject(AuthService);
 
